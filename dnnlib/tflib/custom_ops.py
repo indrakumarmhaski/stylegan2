@@ -28,6 +28,7 @@ compiler_bindir_search_path = [
     'C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.14.26428/bin/Hostx64/x64',
     'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.23.28105/bin/Hostx64/x64',
     'C:/Program Files (x86)/Microsoft Visual Studio 14.0/vc/bin',
+    'C:\Program Files (x86)\Microsoft Visual Studio/2019/BuildTools/VC/Tools/MSVC/14.28.29333/bin/Hostx64/x64'
 ]
 
 #----------------------------------------------------------------------------
@@ -49,9 +50,10 @@ def _get_compute_cap(device):
 def _get_cuda_gpu_arch_string():
     gpus = [x for x in device_lib.list_local_devices() if x.device_type == 'GPU']
     if len(gpus) == 0:
-        raise RuntimeError('No GPU devices found')
-    (major, minor) = _get_compute_cap(gpus[0])
-    return 'sm_%s%s' % (major, minor)
+        # raise RuntimeError('No GPU devices found')
+        ind=1
+    # (major, minor) = _get_compute_cap(gpus[0])
+    return 'sm_60' #% (major, minor)
 
 def _run_cmd(cmd):
     with os.popen(cmd) as pipe:
